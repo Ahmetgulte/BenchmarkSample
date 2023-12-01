@@ -31,14 +31,14 @@ import com.example.benchmarksample.R
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ComplexScreen(component2List: List<Int>) {
+fun ComplexScreen() {
     val lazyListState = rememberLazyListState()
 
     LazyColumn(state = lazyListState, modifier = Modifier.semantics { testTagsAsResourceId = true }.testTag("container")) {
         item {
             Component1()
         }
-        items(component2List) {
+        items(8) {
             Component2(value = it)
         }
         item {
@@ -65,10 +65,16 @@ fun ComplexScreen(component2List: List<Int>) {
     }
 }
 
+
+
+/*
+ Takes list of integer as parameter to make this function unstable
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ComplexScreenV2(component2List: List<Int>) {
     val lazyListState = rememberLazyListState()
+    // creating recomposition
     Log.v("Tag", lazyListState.firstVisibleItemIndex.toString())
 
     LazyColumn(state = lazyListState, modifier = Modifier.semantics { testTagsAsResourceId = true }.testTag("container")) {
